@@ -214,13 +214,7 @@ client.on('message', message => {
 
   // ID for my role: 534639211664506889
   } else if (command === "rainbow") {
-    const embed = new Discord.RichEmbed()
-    .setAuthor(message.author.username, message.author.displayAvatarURL)
-    .setColor('USER COLOR HERE')
-    .addField('XP:', userXp, true)
-    .addField('XP Reserve:', userXpReserve, true)
-    .addField('Rank:', "working on this part", false)
-    .setFooter(message.author.tag)
+    const role = "534639211664506889"
 message.channel.send(embed);
   } else if (command === "help") {
       const helpEmbed = new Discord.RichEmbed()
