@@ -3,6 +3,7 @@ const {prefix, token} = require('./config.json');
 
 const client = new Discord.Client();
 
+// Console logging for starting up the bot
 client.on("ready", () => {
   // Types out a connection message
   console.log("Bot is online!");
@@ -23,10 +24,13 @@ client.on("ready", () => {
   // client.user.setActivity("TV", {type: "WATCHING"})
 });
 
+// Console logging for bot going offline.
 client.on("disconnect", () => console.log('Bot has been disconnected.'));
 
+// Console logging for bot attempting to reconnect.
 client.on("reconnect", () => console.log('Attempting to reconnect...'));
 
+// Checks all messages being sent in chats where the bot can read
 client.on('message', message => {
   // Checks if message is sent by a bot, if it is then it stops.
   if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -36,22 +40,31 @@ client.on('message', message => {
 
   // ${prefix} checks for the prefix on all messages
   // Simple response to the prefix followed by "ping", bot says "Pong."
+  // Finished but might be removed - not very useful
   if (command === "ping") {
     message.channel.send('Pong.');
 
+    // Simple command replying "Boop." to your beep
+    // Finished but might be removed - not very useful
   } else if (message.content.startsWith(`${prefix}beep`)) {
     message.channel.send('Boop.');
     // Here, it grabs server name through ${message.guild.name}
     // It does a line change with /n after the first command
     // It then grabs the member count with ${message.guild.memberCount}
 
+    // Server command - posts some info about the current server
+    // Still WIP - want to add more details
   } else if (message.content === `${prefix}server`) {
     message.channel.send(`This server's name is: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
 
+    // Userinfo command - displays info about the user posting the command
+    // Still WIP - want to add more info and display other users' info as well
     // Grabs username through ${message.author.username} and ID through ${message.author.id}
   } else if (message.content === `${prefix}userinfo`) {
     message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
 
+    // Command for kicking users from your server without banning them.
+    // Finished unless i do minor changes
   } else if (command === 'kick') {
     // Assuming we mention someone in the message, this will return the user
     const user = message.mentions.users.first();
@@ -93,6 +106,8 @@ client.on('message', message => {
       message.reply('You didn\'t mention the user to kick!');
     }
 
+    // Prune command for bulk deleting messages from 1 to 100 at a time.
+    // Still WIP - need to fix so everyone can't use it
   } else if (command === 'prune') {
     const amount = parseInt(args[0]) + 1;
   
@@ -111,6 +126,9 @@ client.on('message', message => {
       // has none of the roles
      message.reply("You need to be an admin to delete messages with prune.");
     }
+
+    // Info command - Displays info about me and shows what i do and what the bot is about.
+    // Finished until i feel a need to update my info
   } else if (command === 'info') {
     // Creates an embed, this uses all the examples you can have for an embed.
     const infoEmbed = new Discord.RichEmbed()
@@ -131,7 +149,8 @@ client.on('message', message => {
 
   message.channel.send(infoEmbed);
 
-
+    // Simple test command for reactions. The bot can do normal, custom and even animated emotes
+    // Finished but might get deleted - Just for testing so not very useful
   } else if (message.content === `${prefix}react`) {
       message.react('563278216429699082')
         .then(() => message.react('534714937767886858'))
@@ -139,6 +158,8 @@ client.on('message', message => {
         .then(() => message.react('608232675450421248'))
         .catch(() => console.error('One of the emojis failed to react.'));
 
+  // Avatar command for displaying your current or another users current avatar
+  // Finished for now - don't feel the need to change anything for this.
   // Creates an embed for the avatars so they show up as images.
   } else if (command === 'avatar') {
     // Makes sure no user is tagged / pinged.
@@ -164,6 +185,8 @@ client.on('message', message => {
       message.channel.send(userAvatarEmbed);
     })
 
+    // Banning command - bans a user from the server.
+    // Somewhat finished - i need to add an unbanning command
   } else if (command === 'ban') {
     // Assuming we mention someone in the message, this will return the user
     const user = message.mentions.users.first();
@@ -212,10 +235,16 @@ client.on('message', message => {
       if (checkAdmin)
     console.log ('This member can kick users');
 
+  /*  Rainbow role mod - does not work yet
+      Is supposed to make roles change colors automatically
+      This is however against TOS so might not finish it
   // ID for my role: 534639211664506889
   } else if (command === "rainbow") {
     const role = "534639211664506889"
-message.channel.send(embed);
+    */
+
+    // Help command - Displays info for all commands and examples for how to use them
+    // Layout is finished but need to keep updating as i add more commands
   } else if (command === "help") {
       const helpEmbed = new Discord.RichEmbed()
         .setColor('#00ff99')
@@ -235,9 +264,12 @@ message.channel.send(embed);
 		    .setFooter('© 2019 Xhera', 'https://i.imgur.com/aiYAPaF.jpg');
       message.channel.send(helpEmbed);
 
+      // this command is just for fun since sed helped me get ideas for the bot lol
   } else if (command === 'sed') {
       message.channel.send("Is very triple epic");
 
+      // Role assigning command - Makes an embed and prompts the user to react to the message to recieve a role.
+      // Assigning roles does not work yet, but the bot does create an embed and adds the reactions on its own.
   } else if (command === "roles") {
 
       const weebRole = message.guild.roles.get('547112333508608003'); // Weeb role
@@ -299,8 +331,52 @@ message.channel.send(embed);
             }
         }).catch(collected => {
             return message.channel.send(`I couldn't add you to this role!`);
-        });
+        })
       })
+
+      // Unbanning command - unbans a user
+      // Still WIP -- Does not work yet
+    } else if (command === 'unban') {
+      // Assuming we mention someone in the message, this will return the user
+      const user = message.mentions.users.first();
+      // If we have a user mentioned
+      if (user) {
+        // Now we get the member from the user
+        const member = message.guild.member(user);
+        // If the member is in the guild
+        if (member) {
+          /**
+           * Unban the member
+           * Make sure you run this on a member, not a user!
+           * There are big differences between a user and a member
+           */
+          // Check if they have one of many roles
+          if(message.member.roles.some(r=>["Masive Nerd", "Epic Admins", "Admin"].includes(r.name)) ) {
+            // has one of the roles
+            member.unban({
+            }).then(() => {
+              // We let the message author know we were able to ban the person
+              message.reply(`Successfully unbanned ${user.tag}`);
+            }).catch(err => {
+              // An error happened
+              // This is generally due to the bot not being able to ban the member,
+              // either due to missing permissions or role hierarchy
+              message.reply('I was unable to unban the member');
+              // Log the error
+              console.error(err);
+            });
+          } else {
+            // has none of the roles
+            message.reply("You can not unban members."); 
+          } 
+        } else {
+          // The mentioned user isn't in this guild
+          message.reply('That user isn\'t in this guild!');
+        }
+      } else {
+      // Otherwise, if no user was mentioned
+        message.reply('You didn\'t mention the user to unban!');
+      }
     }
 });
 
