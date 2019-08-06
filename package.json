@@ -1,0 +1,15 @@
+{
+  "name": "xherabot",
+  "version": "1.0.0",
+  "description": "Simple bot created by Xhera to do various tasks",
+  "main": "XheraBot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Xhera",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
+}
