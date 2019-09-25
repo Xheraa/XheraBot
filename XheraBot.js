@@ -128,7 +128,7 @@ client.on('message', message => {
       // Role assigning command - Makes an embed and prompts the user to react to the message to recieve a role.
       // Assigning roles does not work yet, but the bot does create an embed and adds the reactions on its own.
       // Assigning one role works, the other one does not. I don't know why ¯\_(ツ)_/¯
-  } else if (command === "roles") {
+  } /* else if (command === "roles") {
     client.commands.get('roles').execute(message, args);
 
       
@@ -173,8 +173,8 @@ client.on('message', message => {
       } else {
       // Otherwise, if no user was mentioned
         message.reply('You didn\'t mention the user to unban!');
-      } */
-    } else if (command === "waifu") {
+      } 
+    } */ else if (command === "waifu") {
       client.commands.get('waifu').execute(message, args);
     } else if (command === "hug") {
       client.commands.get('hug').execute(message, args);
