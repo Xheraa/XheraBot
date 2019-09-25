@@ -4,7 +4,8 @@
   "description": "Simple bot created by Xhera to do various tasks",
   "main": "XheraBot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
   },
   "keywords": [],
   "author": "Xhera",
