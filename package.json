@@ -4,12 +4,15 @@
   "description": "Simple bot created by Xhera to do various tasks",
   "main": "XheraBot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node xherabot.js"
   },
   "keywords": [],
   "author": "Xhera",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2"
+    "discord.js": "^11.4.2",
+    "ffmpeg-binaries": "^4.0.0",
+    "request": "2.81.0"
   }
 }
