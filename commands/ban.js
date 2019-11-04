@@ -16,8 +16,8 @@ module.exports = {
          * There are big differences between a user and a member
          */
         // Check if they have one of many roles
-        if(message.member.roles.some(r=>["Masive Nerd", "Epic Admins", "Admin"].includes(r.name)) ) {
-          // has one of the roles
+        if(message.member.roles.some(r=>["Massive Nerd", "Epic Admins", "Admin"].includes(r.name)) ) {
+          // has one of the roles 
           member.ban({
             reason: 'They were bad!',
           }).then(() => {
